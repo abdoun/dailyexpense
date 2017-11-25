@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\pages;
 use Illuminate\Support\Facades\Request;
-//use Illuminate\Http\Response;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App;
 use Session;
@@ -27,6 +27,11 @@ class expense extends Controller {
 	{
 		//$this->middleware('guest');
 		session()->regenerate();
+        App::setLocale(Session::get('lang'));
+        if(Session::get('lang')=='')
+        {
+            Session::put('lang',$request->cookie('lang'));
+        }
 		//Session::put('lang', 'tr');
 	}
 
@@ -43,9 +48,70 @@ class expense extends Controller {
 	public function getLang($lang='tr')
 	{
 		Session::put('lang', $lang);
+        $response = new Response;
+        $response->withCookie(cookie()->forever('lang', $lang));
 		App::setLocale(Session::get('lang'));
 		return view('page.master',['active' => 'home','lang_default' => Session::get('lang')]);
 	}
+    public function getBudget()
+    {
+        App::setLocale(Session::get('lang'));
+        $sql='';$cat='';
+		$user_id=DB::select("select id from users where username='".Session::get('username')."'");
+		$user_id  = json_decode(json_encode($user_id), true);
+        $user_id=$user_id[0]['id'];
+        $bookStartDate=DB::select("select DISTINCT DATEDIFF(CURDATE(),min(date_time)) as days from expenditure where expenditure.user_id='".$user_id."'");
+		$bookStartDate  = json_decode(json_encode($bookStartDate), true);
+        $bookStartDate=$bookStartDate[0]['days'];//echo "$bookStartDate<br>";
+		//$cate = DB::select('select id,name  from expenditure_category where user_id='.$user_id.$sql);
+		$results = DB::select('select expenditure.*,expenditure_category.name as name from expenditure inner join expenditure_category on expenditure_category.id=expenditure.category where expenditure.user_id='.$user_id.$cat.$sql.' order by expenditure.id desc');
+        //$results  = json_decode(json_encode($results), true);
+        foreach($results as $k=>$value)
+        {
+            if(empty($resu_n)){$resu_n=0;}
+            if(empty($resu_p)){$resu_p=0;}
+            if(empty($res[$value->name])){$res[$value->name]=0;}
+            if($value->to_from=='to')
+            {
+                $res[$value->name]-=$value->qty;
+                $resu_n+=$value->qty;
+            }
+            else
+            {
+                $res[$value->name]+=$value->qty;
+                $resu_p+=$value->qty;
+            }
+        }
+        return view('expense.budget',['active' => 'budget','lang_default'=>Session::get('lang'),'res'=>$res,'resu_p'=>$resu_p,'resu_n'=>$resu_n,'days'=>$bookStartDate]);
+    }
+    public function getReport()
+    {
+        App::setLocale(Session::get('lang'));
+        $sql='';$cat='';
+		$user_id=DB::select("select id from users where username='".Session::get('username')."'");
+		$user_id  = json_decode(json_encode($user_id), true);
+        $user_id=$user_id[0]['id'];
+		//$cate = DB::select('select id,name  from expenditure_category where user_id='.$user_id.$sql);
+		$results = DB::select('select expenditure.*,expenditure_category.name as name from expenditure inner join expenditure_category on expenditure_category.id=expenditure.category where expenditure.user_id='.$user_id.$cat.$sql.' order by expenditure.id desc');
+        //$results  = json_decode(json_encode($results), true);
+        foreach($results as $k=>$value)
+        {
+            if(empty($resu_n)){$resu_n=0;}
+            if(empty($resu_p)){$resu_p=0;}
+            if(empty($res[$value->name])){$res[$value->name]=0;}
+            if($value->to_from=='to')
+            {
+                $res[$value->name]-=$value->qty;
+                $resu_n+=$value->qty;
+            }
+            else
+            {
+                $res[$value->name]+=$value->qty;
+                $resu_p+=$value->qty;
+            }
+        }
+        return view('expense.report',['active' => 'budget','lang_default'=>Session::get('lang'),'res'=>$res,'resu_p'=>$resu_p,'resu_n'=>$resu_n]);
+    }
     public function getTransactions($rec=0)
     {
         App::setLocale(Session::get('lang'));
@@ -54,10 +120,10 @@ class expense extends Controller {
 		$user_id=DB::select("select id from users where username='".Session::get('username')."'");
 		$user_id  = json_decode(json_encode($user_id), true);
         $user_id=$user_id[0]['id'];
-		$limit=" limit $rec,10";
+		$limit=" limit $rec,30";
 		//print($sql.' '.$cat);
 		$count = DB::select('select id  from expenditure where user_id='.$user_id.$sql);
-		$results = DB::select('select expenditure.*,expenditure_category.name as name from expenditure inner join expenditure_category on expenditure_category.id=expenditure.category where expenditure.user_id='.$user_id.$cat.$sql.' order by expenditure.id desc'.$limit);
+		$results = DB::select('select expenditure.*,expenditure_category.name as name from expenditure inner join expenditure_category on expenditure_category.id=expenditure.category where expenditure.user_id='.$user_id.$cat.$sql.' order by expenditure.date_time desc'.$limit);
 		//return view('page.thesaurusresult',['active' => 'thesaurus','lang_default'=>Session::get('lang'),'input'=>$input,'results'=>$results,'count'=>$count,'cate'=>$cate,'term'=>$term]);
 		return view('expense.transactions',['active' => 'transactions','lang_default'=>Session::get('lang'),'input'=>$input,'results'=>$results,'count'=>$count]);
     }

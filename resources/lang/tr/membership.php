@@ -3,11 +3,14 @@
 return [
 
 	"membership" => "Üyelik",
+    "signup" => "Kaydol",
+	"SIGNUP" => "KAYDOL",
+    "email" => "E-posta",
 	"login" => "giriş",
 	"LOGIN" => "GİRİŞ",
 	"logout" => "Çıkış",
-	"add_authors" => "Yazarlar Ekle",
-	"edit_property" => "Özellik Düzenle",
+	"profile" => "Profil",
+	"changepass" => "parolayı değiştirme",
 	"username" => "Kullancı Adı",
 	"password" => "Parola",
 	"field_empty" => "Pardon, tüm alanları eklemediniz",

@@ -2,13 +2,13 @@
 
 return [
 
-	"join" => "join",
-	"JOİN" => "JOIN",
+	"join" => "teilnehmen",
+	"JOIN" => "TEILNEHMEN",
 	"name" => "Name",
 	"email" => "E-mail",
 	"code" => "Code",
-	"book_name" => "Book Name",
-	"add" => "Add",
-	"print" => "Print",
+	"book_name" => "Buchname",
+	"add" => "Hinzufügen",
+	"print" => "drucken",
 
 ];

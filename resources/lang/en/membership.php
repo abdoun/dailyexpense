@@ -5,6 +5,7 @@ return [
 	"membership" => "Memebership",
     "signup" => "Signup",
 	"SIGNUP" => "SIGNUP",
+    "email" => "Email",
 	"login" => "Login",
 	"LOGIN" => "LOGIN",
 	"logout" => "Logout",

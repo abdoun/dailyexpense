@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\pages;
 use Illuminate\Support\Facades\Request;
-//use Illuminate\Http\Response;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App;
 use Session;
@@ -27,6 +27,12 @@ class homepage extends Controller {
 	{
 		//$this->middleware('guest');
 		session()->regenerate();
+        App::setLocale(Session::get('lang'));
+        if(Session::get('lang')=='')
+        {
+            
+            Session::put('lang','en');
+        }
 		//Session::put('lang', 'tr');
 	}
 
@@ -40,9 +46,11 @@ class homepage extends Controller {
 		App::setLocale(Session::get('lang'));
 		return view('page.master',['active' => 'home','lang_default'=>Session::get('lang')]);
 	}
-	public function getLang($lang='tr')
+	public function getLang($lang='en')
 	{
 		Session::put('lang', $lang);
+        $response = new Response;
+        $response->withCookie(cookie()->forever('lang', $lang));
 		App::setLocale(Session::get('lang'));
 		return view('page.master',['active' => 'home','lang_default' => Session::get('lang')]);
 	}

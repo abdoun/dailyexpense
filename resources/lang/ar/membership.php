@@ -3,11 +3,14 @@
 return [
 
 	"membership" => "العضوية",
+    "signup" => "تسجيل",
+	"SIGNUP" => "تسجيل",
+    "email" => "البريد الإلكتروني",
 	"login" => "دخول",
 	"LOGIN" => "دخول",
-	"logout" => "خرود",
-	"add_authors" => "إضافة كاتب",
-	"edit_property" => "إضافة صفة",
+	"logout" => "خروج",
+	"profile" => "الملف الشخصي",
+	"changepass" => "تغيير كلمة المرور",
 	"username" => "اسم المستخدم",
 	"password" => "كلمة المرور",
 	"field_empty" => "للأسف، لم تملأ جميع الحقول",

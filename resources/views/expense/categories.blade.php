@@ -12,7 +12,7 @@
 @section('content')
 @if(count($results)>0)
 	<button class="btn btn-primary" type="button">
-	  {{trans('expense.total_records')}}: <span class="badge">{{count($count)}}</span>
+	  {{trans('Title.total_records')}}: <span class="badge">{{count($count)}}</span>
 	</button>	
 	@if($name!='')
 		<button class="btn btn-primary" type="button">
@@ -31,7 +31,7 @@
   </ul>
 </nav>
 <table class="table table-hover">
-  <tr><th><span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#categories_edit_modal" style="color:#008000;cursor:pointer;" aria-hidden="true" onclick="$.get('{{ asset('expense/editcategories') }}/new',function(data){$('#categories_edit_modal_').html(data);} );"></span></th><th>{{trans('expense.name')}}</th>@if(Session::has('username')) <th>{{trans('expense.edit')}}</th><th>{{trans('expense.delete')}}</th> @endif</tr>
+  <tr><th><span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#categories_edit_modal" style="color:#008000;cursor:pointer;" aria-hidden="true" onclick="$.get('{{ asset('expense/editcategories') }}/new',function(data){$('#categories_edit_modal_').html(data);} );"></span></th><th>{{trans('expense.category')}}</th>@if(Session::has('username')) <th>{{trans('expense.edit')}}</th><th>{{trans('expense.delete')}}</th> @endif</tr>
   @foreach ($results as $result)
 	<tr data-toggle="popover" data-placement="bottom" data-trigger="focus" tabindex="0" title="" data-content="{{ $result->name }}"><td>{{$result->id}}</td><td>{{ $result->name }}</td>@if(Session::has('username')) <td><span class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#categories_edit_modal" style="color:#265a88;cursor:pointer;" aria-hidden="true" onclick="$.get('{{ asset('expense/editcategories') }}/{{$result->id}}',function(data){$('#categories_edit_modal_').html(data);} );"></span></td><td><span class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#categories_edit_modal" style="color:red;cursor:pointer;" aria-hidden="true" onclick="$.get('{{ asset('expense/delcategory') }}/{{$result->id}}',function(data){$('#categories_edit_modal_').html(data);} );"></span></td> @endif</tr>
 	{{--*/ $i++ /*--}}
@@ -62,10 +62,10 @@
         <h4 class="modal-title" id="categories_edit_modalLabel">{{ trans('expense.edit') }}</h4>
       </div>
       <div class="modal-body" id="categories_edit_modal_">
-        ... hhhhkkkkkkkkkkkkkk
+        ...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.reload();">{{trans('expense.close')}}</button>        
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.reload();">{{trans('Title.close')}}</button>        
       </div>
     </div>
   </div>

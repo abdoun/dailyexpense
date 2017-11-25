@@ -61,18 +61,18 @@
 						</li>
                         <li class="dropdown @if($active=='expense') active @endif">
 						  <a data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false" class="dropdown-toggle">
-						  {{trans('page.expense')}}
+						  {{trans('expense.expenses')}}
 							<span class="caret"></span>
 						  </a>
 						  <ul class="dropdown-menu" role="menu">
 							<!--<li class="@if($active=='membership_login') active @endif"><a href="{{ asset('membership/login') }}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> {{ trans("membership.login") }}</a></li>-->
-							<li class="@if($active=='transactions') active @endif"><a href="{{ asset('expense/transactions') }}"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> {{ trans("expense.transactionsedit") }}</a></li>
+							<li class="@if($active=='transactions') active @endif"><a href="{{ asset('expense/transactions') }}"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> {{ trans("expense.transactions") }}</a></li>
 							<li class="@if($active=='categories') active @endif"><a href="{{ asset('expense/categories') }}"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> {{ trans("expense.categories") }}</a></li>
 							<li class="divider"></li>
-                            <li class="@if($active=='budget') active @endif"><a href="{{ asset('page/budget') }}"><span class="glyphicon glyphicon-euro" aria-hidden="true"></span> {{ trans("expense.budget") }}</a></li>
-							<li><a href="{{ asset('page/report') }}"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> {{ trans("expense.report") }}</a></li>
-                            <li><a href="{{ asset('page/charts') }}"><span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span> {{ trans("expense.charts") }}</a></li>
-                            <li><a href="{{ asset('page/calendar') }}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{ trans("expense.calendar") }}</a></li>
+                            <li class="@if($active=='budget') active @endif"><a href="{{ asset('expense/budget') }}"><span class="glyphicon glyphicon-euro" aria-hidden="true"></span> {{ trans("expense.budget") }}</a></li>
+							<li class="@if($active=='report') active @endif"><a href="{{ asset('expense/report') }}"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> {{ trans("expense.report") }}</a></li>
+                            <li class="@if($active=='charts') active @endif"><a href="{{ asset('expense/charts') }}"><span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span> {{ trans("expense.charts") }}</a></li>
+                            <li class="@if($active=='calendar') active @endif"><a href="{{ asset('expense/calendar') }}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{ trans("expense.calendar") }}</a></li>
                             <li class="divider"></li>
                             <li class="@if($active=='export_import') active @endif"><a href="{{ asset('page/export_import') }}"><span class="glyphicon glyphicon-import" aria-hidden="true"></span> {{ trans("expense.export_import") }}</a></li>
 						  </ul>
@@ -116,7 +116,7 @@
 		
 		<div class="row" style="border:1px #f0f0f0 solid;">
         @section('header')
-            <div class="col-xs-12" style="padding:0"><img src="{{ asset('assets/images/ust1.jpg') }}" width="100%" height="40%" /> </div>
+            <div class="col-xs-12 hidden-xs" style="padding:0"><img src="{{ asset('assets/images/ust1.jpg') }}" class="img-responsive" /> </div>
         @show
 	</div>
         <div class="row" style="background-image:url('{{ asset('assets/images/bg.jpg') }}');background-repeat: repeat-x;background-position: top;">
@@ -125,7 +125,7 @@
 				@yield('content',trans('home.home_content'))
 			</div>
 			@section('footer')
-				<div class="col-xs-12" style="padding:0;text-align:center;direction: ltr;"><span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span>  Abdullah Alaswad</div>
+				<div class="col-xs-12" style="padding:0;text-align:center;direction: ltr;color:#C0C0C0">Powerd by Abdullah Alaswad</div>
 			@show
 		</div>
 		

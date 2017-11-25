@@ -2,8 +2,8 @@
 
 return [
 
-	"list" => "list",
-	"LIST" => "LIST",
+	"list" => "Liste",
+	"LIST" => "LISTE",
 	
 
 ];

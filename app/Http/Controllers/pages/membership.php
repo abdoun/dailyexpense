@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\pages;
 use Illuminate\Support\Facades\Request;
-//use Illuminate\Http\Response;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App;
 use Session;
@@ -16,6 +16,11 @@ class membership extends Controller {
 	{
 		//$this->middleware('guest');
 		session()->regenerate();
+        App::setLocale(Session::get('lang'));
+        if(Session::get('lang')=='')
+        {
+            Session::put('lang',$request->cookie('lang'));
+        }
 		//Session::put('lang', 'tr');
 	}
 

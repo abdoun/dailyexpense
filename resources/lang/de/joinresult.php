@@ -2,11 +2,11 @@
 
 return [
 
-	"field_empty" => "Sorry, you have not filled all fields",
+	"field_empty" => "Entschuldigung, Sie haben nicht alle Felder ausgefüllt",
 	"ok" => "Ok",
-	"thanks" => "Thanks",
-	"error_email" => "E-mail address is wrong",
-	"start_date" => "Start Date",
-	"error_code_kaptcha"=>"Sorry ,The code is wrong",
+	"thanks" => "Danke",
+	"error_email" => "E-mail Adresse ist falsch",
+	"start_date" => "Beginndatum",
+	"error_code_kaptcha"=>"Entschuldigung ,der Code ist falsch",
 
 ];
