@@ -25,7 +25,7 @@
   
 </nav>
 <table class="table table-hover">
-  <tr><th></th><th>{{trans('expense.category')}}</th> <th>{{trans('expense.sum')}}</th><th>{{trans('expense.percentage')}}</th><th>{{trans('expense.daily')}}</th></tr>
+  <tr><td></td><td>{{trans('expense.category')}}</td><td>{{trans('expense.sum')}}</td><td>{{trans('expense.percentage')}}</td><td>{{trans('expense.daily')}}</td></tr>
   @foreach ($res as $cate=>$result)
 	<tr style="@if($result<0) background-color: #FBB0B0; @else background-color: #B5FE9D; @endif" data-toggle="popover" data-placement="bottom" data-trigger="focus" tabindex="0" title="" data-content="{{ $cate }}"><td></td><td>{{$cate}}</td><td>{{ $result }}</td><td>@if($result<0) {{round($result*100/$resu_n,2)}} @else {{round($result*100/$resu_p,2)}} @endif %</td><td>{{round($result/$days,2)}}</td></tr>
 	{{--*/ $i++ /*--}}

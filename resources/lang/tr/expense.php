@@ -2,7 +2,7 @@
 
 return [
 
-	"expenses" => "expenses",
+	"expenses" => "harcamalar",
 	"transactions" => "transactions",
 	"categories" => "categories",
     "budget" => "budget",
@@ -16,11 +16,11 @@ return [
     "export_import" => "export & import",
     "notes"=>"Notlar",
     "remaining"=>"kalan",
-    "income"=>"kazanç",
+    "income"=>"kazanÃ§",
     "day"=>"g?n",
-    "payments"=>"?demler",
-    "percentage"=>"yüzde oran",
-    "daily"=>"günl?k",
+    "payments"=>"Ã¶demler",
+    "percentage"=>"yÃ¼zde oran",
+    "daily"=>"gÃ¼nlÃ¼k",
     "sum"=>"toplam"
     
 ];
