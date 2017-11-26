@@ -13,6 +13,14 @@ return [
     "value" => "value",
     "edit" => "edit",
     "delete" => "delete",
-    "export_import" => "export & import"
+    "export_import" => "export & import",
+    "notes"=>"Notlar",
+    "remaining"=>"kalan",
+    "income"=>"kazanç",
+    "day"=>"g?n",
+    "payments"=>"?demler",
+    "percentage"=>"yüzde oran",
+    "daily"=>"günl?k",
+    "sum"=>"toplam"
     
 ];
