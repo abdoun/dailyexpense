@@ -19,7 +19,7 @@ class membership extends Controller {
         App::setLocale(Session::get('lang'));
         if(Session::get('lang')=='')
         {
-            Session::put('lang',$request->cookie('lang'));
+            Session::put('lang','en');
         }
 		//Session::put('lang', 'tr');
 	}
@@ -49,6 +49,11 @@ class membership extends Controller {
 		App::setLocale(Session::get('lang'));
 		return view('membership.changepass',['active' => 'membership_changepass','lang_default'=>Session::get('lang'),'msg'=>$msg]);
 	}
+    public function getForgetpass($msg='')
+    {
+        App::setLocale(Session::get('lang'));
+        return view('membership.forgetpass',['active' => 'membership_forgetpass','lang_default'=>Session::get('lang'),'msg'=>$msg]);
+    }
     public function postSignup()
 	{
 		App::setLocale(Session::get('lang'));
@@ -80,7 +85,7 @@ class membership extends Controller {
 			{
 			 //////// insert new user/////////////////////////
              DB::table('users')->insert(
-                    ['email' => $input['email'], 'username' => $input['username'],'password'=>$input['password'],'active'=>1]
+                    ['email' => $input['email'], 'username' => $input['username'],'password'=>md5($input['password']),'active'=>1]
                 );
 				Session::put('username', $input['username']);
 				$msg='thanks';
@@ -110,7 +115,7 @@ class membership extends Controller {
 		}
 		else
 		{
-			$result=DB::select("SELECT count(*) as c FROM users where username='".$input['username']."' and password='".$input['password']."' and active='1'");
+			$result=DB::select("SELECT count(*) as c FROM users where username='".$input['username']."' and password='".md5($input['password'])."' and active='1'");
 			$result  = json_decode(json_encode($result), true);
 			if($result[0]['c']<1)
 			{
