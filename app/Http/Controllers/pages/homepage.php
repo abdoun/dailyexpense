@@ -49,8 +49,8 @@ class homepage extends Controller {
 	public function getLang($lang='en')
 	{
 		Session::put('lang', $lang);
-        $response = new Response;
-        $response->withCookie(cookie()->forever('lang', $lang));
+        //$response = new Response;
+        //$response->withCookie(cookie()->forever('lang', $lang));
 		App::setLocale(Session::get('lang'));
 		return view('page.master',['active' => 'home','lang_default' => Session::get('lang')]);
 	}

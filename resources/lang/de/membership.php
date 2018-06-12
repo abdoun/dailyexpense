@@ -3,6 +3,9 @@
 return [
 
 	"membership" => "Mitgliedschaft",
+    "signup" => "Registrieren",
+	"SIGNUP" => "Registrieren",
+    "email" => "E-Mail",
 	"login" => "Anmeldung",
 	"LOGIN" => "ANMELDUNG",
 	"logout" => "Abmeldung",
