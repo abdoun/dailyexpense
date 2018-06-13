@@ -30,7 +30,7 @@ class expense extends Controller {
         App::setLocale(Session::get('lang'));
         if(Session::get('lang')=='')
         {
-            Session::put('lang',$request->cookie('lang'));
+            Session::put('lang','en');
         }
 		//Session::put('lang', 'tr');
 	}
