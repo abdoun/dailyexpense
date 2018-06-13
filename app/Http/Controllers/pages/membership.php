@@ -7,7 +7,9 @@ use Session;
 use DB;
 class membership extends Controller {
 
-	/**
+
+
+    /**
 	 * Create a new controller instance.
 	 *
 	 * @return void
@@ -22,6 +24,7 @@ class membership extends Controller {
             Session::put('lang','en');
         }
 		//Session::put('lang', 'tr');
+
 	}
 
 	/**
@@ -160,7 +163,7 @@ class membership extends Controller {
 			
 		}
 	}
-	protected function satisfied()
+	public function satisfied()
     {
         $user_id=DB::select("select id from users where username='".Session::get('username')."'");
         $user_id  = json_decode(json_encode($user_id), true);
