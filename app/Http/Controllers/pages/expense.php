@@ -17,7 +17,10 @@ class expense extends Controller {
 	| controllers, you are free to modify or remove it as you desire.
 	|
 	*/
-
+    /**
+     * membership
+     */
+    protected $membership;
 	/**
 	 * Create a new controller instance.
 	 *
@@ -33,6 +36,7 @@ class expense extends Controller {
             Session::put('lang','en');
         }
 		//Session::put('lang', 'tr');
+        $this->membership=new membership();
 	}
 
 	/**
@@ -43,23 +47,23 @@ class expense extends Controller {
 	public function getIndex()
 	{
 		App::setLocale(Session::get('lang'));
+        if(!$this->membership->satisfied())  return $this->membership->getLogin();
 		return view('page.master',['active' => 'home','lang_default'=>Session::get('lang')]);
 	}
 	public function getLang($lang='tr')
 	{
 		Session::put('lang', $lang);
         $response = new Response;
-        $response->withCookie(cookie()->forever('lang', $lang));
+        //$response->withCookie(cookie()->forever('lang', $lang));
 		App::setLocale(Session::get('lang'));
 		return view('page.master',['active' => 'home','lang_default' => Session::get('lang')]);
 	}
     public function getBudget()
     {
         App::setLocale(Session::get('lang'));
+        if(!$this->membership->satisfied())  return $this->membership->getLogin();
         $sql='';$cat='';
-		$user_id=DB::select("select id from users where username='".Session::get('username')."'");
-		$user_id  = json_decode(json_encode($user_id), true);
-        $user_id=$user_id[0]['id'];
+		$user_id=$this->membership->satisfied();
         $bookStartDate=DB::select("select DISTINCT DATEDIFF(CURDATE(),min(date_time)) as days from expenditure where expenditure.user_id='".$user_id."'");
 		$bookStartDate  = json_decode(json_encode($bookStartDate), true);
         $bookStartDate=$bookStartDate[0]['days'];//echo "$bookStartDate<br>";
@@ -87,10 +91,9 @@ class expense extends Controller {
     public function getReport()
     {
         App::setLocale(Session::get('lang'));
+        if(!$this->membership->satisfied())  return $this->membership->getLogin();
         $sql='';$cat='';
-		$user_id=DB::select("select id from users where username='".Session::get('username')."'");
-		$user_id  = json_decode(json_encode($user_id), true);
-        $user_id=$user_id[0]['id'];
+        $user_id=$this->membership->satisfied();
 		//$cate = DB::select('select id,name  from expenditure_category where user_id='.$user_id.$sql);
 		$results = DB::select('select expenditure.*,expenditure_category.name as name from expenditure inner join expenditure_category on expenditure_category.id=expenditure.category where expenditure.user_id='.$user_id.$cat.$sql.' order by expenditure.id desc');
         //$results  = json_decode(json_encode($results), true);
@@ -115,11 +118,10 @@ class expense extends Controller {
     public function getTransactions($rec=0)
     {
         App::setLocale(Session::get('lang'));
+        if(!$this->membership->satisfied())  return $this->membership->getLogin();
         $input['rec']=$rec;if($input['rec']==''){$input['rec']=0;}
 		$sql='';$cat='';
-		$user_id=DB::select("select id from users where username='".Session::get('username')."'");
-		$user_id  = json_decode(json_encode($user_id), true);
-        $user_id=$user_id[0]['id'];
+        $user_id=$this->membership->satisfied();
 		$limit=" limit $rec,30";
 		//print($sql.' '.$cat);
 		$count = DB::select('select id  from expenditure where user_id='.$user_id.$sql);
@@ -130,6 +132,7 @@ class expense extends Controller {
     public function getEdittransactions($id,$msg='')
 	{
 		App::setLocale(Session::get('lang'));
+        if(!$this->membership->satisfied())  return $this->membership->getLogin();
         $user_id=DB::select("select id from users where username='".Session::get('username')."'");
 		$user_id  = json_decode(json_encode($user_id), true);
         $user_id=$user_id[0]['id'];
@@ -149,13 +152,12 @@ class expense extends Controller {
 	public function getCategories($name='',$rec=0)
 	{
 		App::setLocale(Session::get('lang'));
+        if(!$this->membership->satisfied())  return $this->membership->getLogin();
         //$input = Request::all();
 		$input['name']=$name;if($input['name']==''){$input['name']=0;}
 		$input['rec']=$rec;if($input['rec']==''){$input['rec']=0;}
 		$sql='';$cat='';
-		$user_id=DB::select("select id from users where username='".Session::get('username')."'");
-		$user_id  = json_decode(json_encode($user_id), true);
-        $user_id=$user_id[0]['id'];
+        $user_id=$this->membership->satisfied();
 		$limit=" limit $rec,10";
 		//print($sql.' '.$cat);
 		$count = DB::select('select expenditure_category.id  from expenditure_category where user_id='.$user_id.$sql);
@@ -166,6 +168,7 @@ class expense extends Controller {
     public function getEditcategories($id,$msg='')
 	{
 		App::setLocale(Session::get('lang'));
+        if(!$this->membership->satisfied())  return $this->membership->getLogin();
         if($id!='new')
         {
             //$author = DB::select("select * from authors where id='".$id."'");
@@ -181,6 +184,7 @@ class expense extends Controller {
 	}
     public function getDelcategory($id)
     {
+        if(!$this->membership->satisfied())  return $this->membership->getLogin();
         if(!empty($id))
         {
             DB::table('expenditure_category')->where('id', '=', $id)->delete();
@@ -190,6 +194,7 @@ class expense extends Controller {
     public function postEditcategories()
 	{
 		App::setLocale(Session::get('lang'));
+        if(!$this->membership->satisfied())  return $this->membership->getLogin();
 		$input = Request::all();
 		if(empty($input['name']))
 		{
@@ -198,9 +203,7 @@ class expense extends Controller {
 		}
 		else
 		{
-		    $user_id=DB::select("select id from users where username='".Session::get('username')."'");
-    		$user_id  = json_decode(json_encode($user_id), true);
-            $user_id=$user_id[0]['id'];
+            $user_id=$this->membership->satisfied();
 			if(!empty($input['id_category']))
 			{
                 DB::table('expenditure_category')->where('id', $input['id_category'])->update(['name' => $input['name'],'notes'=>$input['notes']]);
@@ -226,6 +229,7 @@ class expense extends Controller {
     public function postEdittansactions()
 	{
 		App::setLocale(Session::get('lang'));
+        if(!$this->membership->satisfied())  return $this->membership->getLogin();
 		$input = Request::all();
         if(empty($input['id'])){$input['id']='new';}
 		if(empty($input['qty']) || $input['qty']<1)
@@ -240,9 +244,7 @@ class expense extends Controller {
 		}
 		else
 		{
-		    $user_id=DB::select("select id from users where username='".Session::get('username')."'");
-    		$user_id  = json_decode(json_encode($user_id), true);
-            $user_id=$user_id[0]['id'];
+            $user_id=$this->membership->satisfied();
 			if($input['id']!='new')
 			{
                 DB::table('expenditure')->where('id', $input['id'])->update(['to_from' => $input['to_from'],'date_time' => $input['date_time'],'qty' => $input['qty'],'notes'=>$input['notes'],'category' => $input['category']]);
@@ -263,6 +265,7 @@ class expense extends Controller {
 	}
     public function getDeltransactions($id)
     {
+        if(!$this->membership->satisfied())  return $this->membership->getLogin();
         if(!empty($id))
         {
             DB::table('expenditure')->where('id', '=', $id)->delete();

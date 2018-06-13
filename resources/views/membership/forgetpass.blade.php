@@ -6,7 +6,7 @@
 	@parent
 @stop
 @section('content_title')
-{{ trans('membership.LOGIN') }}
+{{ trans('passwords.forgetpass') }}
 @stop
 
 @section('content')
@@ -21,7 +21,7 @@
 	</div>
 </div>
 @endif
-<form class="form-horizontal" id="thesaurus_search" method="post"  action="{{ asset('membership/signin') }}">
+<form class="form-horizontal" id="thesaurus_search" method="post"  action="{{ asset('membership/forgetpass') }}">
 <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
   <div class="form-group">
     <label for="username" class="col-xs-3 control-label">{{ trans('membership.username') }}:</label>
@@ -30,9 +30,9 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="password" class="col-xs-3 control-label">{{ trans('membership.password') }}:</label>
+    <label for="email" class="col-xs-3 control-label">{{ trans('membership.email') }}:</label>
 	<div class="col-sm-9 col-md-6">
-		<input type="password" class="form-control" id="password" name="password" placeholder="{{ trans('membership.password') }}">
+		<input type="email" class="form-control" id="email" name="email" placeholder="{{ trans('membership.email') }}">
 	</div>
   </div>
   <div class="form-group @if($msg=='error_code_kaptcha') has-error @endif">
@@ -48,13 +48,9 @@
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-4 col-xs-3">
-      <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="$.post('{{ asset('Titleresult') }}', $( '#Title_search' ).serialize(),function(data){$('#yaz_print').html(data);} );">{{ trans('Title.search') }}</button>-->
-      <button type="submit" class="btn btn-default">{{ trans('membership.login') }}</button>
+    <div class="col-sm-offset-3 col-sm-4">
+      <button type="submit" class="btn btn-default">{{ trans('passwords.send') }}</button>
     </div>
-  <div class=" col-sm-2 col-xs-3">
-      <a href="{{asset('membership/forgetpass')}}">{{ trans('passwords.forgetpass') }}</a>
-  </div>
   </div>
   
 </form>
