@@ -6,7 +6,7 @@
 	@parent
 @stop
 @section('content_title')
-{{ trans('membership.ChangePass') }}
+{{ trans('passwords.forgetpass') }}
 @stop
 
 @section('content')
@@ -49,8 +49,7 @@
   </div>
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-4">
-      <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="$.post('{{ asset('Titleresult') }}', $( '#Title_search' ).serialize(),function(data){$('#yaz_print').html(data);} );">{{ trans('Title.search') }}</button>-->
-      <button type="submit" class="btn btn-default">{{ trans('membership.send') }}</button>
+      <button type="submit" class="btn btn-default">{{ trans('passwords.send') }}</button>
     </div>
   </div>
   

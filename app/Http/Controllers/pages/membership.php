@@ -42,13 +42,42 @@ class membership extends Controller {
     public function getProfile($msg='')
 	{
 		App::setLocale(Session::get('lang'));
+        if(!$this->satisfied())  return $this->getLogin();
+
 		return view('membership.profile',['active' => 'membership_profile','lang_default'=>Session::get('lang'),'msg'=>$msg]);
 	}
     public function getChangepass($msg='')
 	{
 		App::setLocale(Session::get('lang'));
+        if(!$this->satisfied())  return $this->getLogin();
 		return view('membership.changepass',['active' => 'membership_changepass','lang_default'=>Session::get('lang'),'msg'=>$msg]);
 	}
+    public function postChangepass()
+    {
+        App::setLocale(Session::get('lang'));
+        if(!$this->satisfied())  return $this->getLogin();
+        $user_id=$this->satisfied();
+        $input = Request::all();
+        if (empty($input['code_capthca']) || Session::get('new_string')!=$input['code_capthca'])
+        {
+            $msg='error_code_kaptcha';
+            return $this->getChangepass($msg);
+        }
+        elseif(empty($input['password']))
+        {
+            $msg='field_empty';
+            return $this->getChangepass($msg);
+        }
+        else
+        {
+            DB::table('users')
+                ->where('id',$user_id)
+                ->update(['password'=>md5($input['password'])]);
+            $msg='reset';
+            return $this->getChangepass($msg);
+        }
+
+    }
     public function getForgetpass($msg='')
     {
         App::setLocale(Session::get('lang'));
@@ -131,22 +160,18 @@ class membership extends Controller {
 			
 		}
 	}
-	public function getAddauthors()
-	{
-		App::setLocale(Session::get('lang'));
-		return view('membership.membership',['active' => 'membership_addauthors','lang_default'=>Session::get('lang'),'msg'=>'']);
-	}
-	public function getEditproperty()
-	{
-		App::setLocale(Session::get('lang'));
-		return redirect('pages/thesaurus');
-		//return view('membership.membership',['active' => 'membership_editproperty','lang_default'=>Session::get('lang'),'msg'=>'']);
-	}
+	protected function satisfied()
+    {
+        $user_id=DB::select("select id from users where username='".Session::get('username')."'");
+        $user_id  = json_decode(json_encode($user_id), true);
+         return isset($user_id[0]['id']) ? $user_id[0]['id'] : false;
+    }
 	public function getLogout()
-	{		
-			Session::forget('username');
-			$msg='thanks';
-			return $this->getLogin($msg);		
+	{
+        if(!$this->satisfied())  return $this->getLogin();
+        Session::forget('username');
+        $msg='thanks';
+        return $this->getLogin($msg);
 	}
 	public function getImgcaptcha()
 	{

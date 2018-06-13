@@ -53,7 +53,7 @@
       <button type="submit" class="btn btn-default">{{ trans('membership.login') }}</button>
     </div>
   <div class=" col-sm-2 col-xs-3">
-      <a href="{{asset('membership/forgetpass')}}">{{ trans('membership.forgetpass') }}</a>
+      <a href="{{asset('membership/forgetpass')}}">{{ trans('passwords.forgetpass') }}</a>
   </div>
   </div>
   

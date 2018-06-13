@@ -49,7 +49,7 @@ class expense extends Controller {
 	{
 		Session::put('lang', $lang);
         $response = new Response;
-        $response->withCookie(cookie()->forever('lang', $lang));
+        //$response->withCookie(cookie()->forever('lang', $lang));
 		App::setLocale(Session::get('lang'));
 		return view('page.master',['active' => 'home','lang_default' => Session::get('lang')]);
 	}
