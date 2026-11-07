@@ -6,23 +6,8 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>{{ trans('home.Title') }}</title>
     <!-- Bootstrap -->
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+	<link rel="stylesheet" href="{{ asset('/css/bootstrap-theme.min.css') }}">
 </head>
     <body>
 	<div class="container" style="border:1px #f0f0f0 solid;">
@@ -81,18 +66,7 @@
 						<li class="@if($active=='membership_login') active @endif"><a href="{{ asset('membership/login') }}">{{ trans('membership.LOGIN') }}</a></li>
                         <li class="@if($active=='membership_signup') active @endif"><a href="{{ asset('membership/signup') }}">{{ trans('membership.SIGNUP') }}</a></li>
 					@endif
-                    <li class="dropdown @if($active=='about') active @endif">
-						  <a data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false" class="dropdown-toggle">
-						  {{trans('about.ABOUT')}}
-							<span class="caret"></span>
-						  </a>
-						  <ul class="dropdown-menu" role="menu">
-							<!--<li class="@if($active=='membership_login') active @endif"><a href="{{ asset('membership/login') }}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> {{ trans("membership.login") }}</a></li>-->
-							<li class="@if($active=='about_project') active @endif"><a href="{{ asset('pages/aboutproject') }}"><span class="" aria-hidden="true"></span> {{ trans("about.about_pro") }}</a></li>
-							<li class="@if($active=='about_me') active @endif"><a href="{{ asset('pages/aboutme') }}"><span class="" aria-hidden="true"></span> {{ trans("about.about_me") }}</a></li>
-							
-						  </ul>
-						</li>
+                    <li class="@if($active=='privacy') active @endif" @if($lang_default=='ar') style="float:right" @endif><a href="{{ asset('pages/privacy') }}">{{ trans('privacy.privacy_notes') }}</a></li>
                     <li class="@if($active=='contacts') active @endif" @if($lang_default=='ar') style="float:right" @endif><a href="{{ asset('pages/contacts') }}">{{ trans('contacts.CONTACTS') }}</a></li>					
 				  </ul>
 				  <ul class="nav navbar-nav @if($lang_default=='ar') navbar-left @else navbar-right @endif">
@@ -113,6 +87,11 @@
 			  </div>
 			</nav>
         @show
+		<div class="alert alert-info alert-dismissible" role="note" style="margin-bottom:0">
+			<button type="button" class="close" data-dismiss="alert" aria-label="{{ trans('privacy.close') }}"><span aria-hidden="true">&times;</span></button>
+			{{ trans('privacy.banner') }}
+			<a href="{{ asset('pages/privacy') }}">{{ trans('privacy.privacy_notes') }}</a>
+		</div>
 		
 		<div class="row" style="border:1px #f0f0f0 solid;">
         @section('header')
@@ -133,5 +112,7 @@
 		</div>
 		
     </div>
+    <script src="{{ asset('/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
     </body>
 </html>

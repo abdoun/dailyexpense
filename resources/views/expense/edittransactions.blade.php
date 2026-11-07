@@ -29,15 +29,9 @@
 <div class="form-group">
   <label for="term" class="col-xs-3 control-label">{{trans('expense.date')}}: </label>
   <div class="col-sm-9">
-    <input data-provide="datepicker" type="text" class="form-control datepicker" data-date-format="yyyy-mm-dd" id="date_time" name="date_time" placeholder="date" value="{{$expenditure[0]['date_time']}}">
+    <input type="date" class="form-control" id="date_time" name="date_time" placeholder="date" value="{{$expenditure[0]['date_time']}}">
   </div>
 </div>
-<script>$('.datepicker').datepicker({
-    autoclose: true,
-    format: "yyyy-mm-dd",
-    //daysOfWeekDisabled: "0",
-    daysOfWeekHighlighted: "0",
-    todayHighlight: true});</script>
 <div class="form-group">
   <label for="term" class="col-xs-3 control-label">{{trans('expense.category')}}: </label>
   <div class="col-sm-9">

@@ -59,9 +59,29 @@
 	<div class="col-xs-6 align_right">{{trans("joinresult.start_date")}}</div>	
 	<div class="col-xs-6">{{$etiket[0]['start_date']}}</div>
 	<div class="col-xs-6 align_right">{{trans("join.code")}}:</div>	
-	<div class="col-xs-6"><img src="https://chart.googleapis.com/chart?chs=150x150&amp;cht=qr&amp;chl={{$etiket[0]['kod']}}&amp;choe=UTF-8" alt="QR code" /></div>
+	<div class="col-xs-6">
+		<div id="qr_code" data-code="{{ $etiket[0]['kod'] }}"></div>
+		<span>{{ $etiket[0]['kod'] }}</span>
+	</div>
 </div>
+<script src="{{ asset('/js/qrcode.min.js') }}"></script>
 <script>
+var qrContainer = document.getElementById('qr_code');
+if (qrContainer) {
+	new QRCode(qrContainer, {
+		text: qrContainer.getAttribute('data-code'),
+		width: 150,
+		height: 150
+	});
+	var qrCanvas = qrContainer.querySelector('canvas');
+	if (qrCanvas) {
+		var qrImage = document.createElement('img');
+		qrImage.src = qrCanvas.toDataURL('image/png');
+		qrImage.alt = 'QR code';
+		qrContainer.innerHTML = '';
+		qrContainer.appendChild(qrImage);
+	}
+}
 javascript:PrintDiv_('etiket');
 </script>
 @endif

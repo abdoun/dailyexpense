@@ -104,15 +104,10 @@ class homepage extends Controller {
 		App::setLocale(Session::get('lang'));
 		return view('page.contacts',['active' => 'contacts','lang_default'=>Session::get('lang')]);
 	}
-    public function getAboutproject()
+    public function getPrivacy()
 	{
 		App::setLocale(Session::get('lang'));
-		return view('page.aboutproject',['active' => 'about_project','lang_default'=>Session::get('lang')]);
-	}
-    public function getAboutme()
-	{
-		App::setLocale(Session::get('lang'));
-		return view('page.aboutme',['active' => 'about_me','lang_default'=>Session::get('lang')]);
+		return view('page.privacy',['active' => 'privacy','lang_default'=>Session::get('lang')]);
 	}
 	public function postEditauthor()
 	{

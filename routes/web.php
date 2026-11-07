@@ -17,8 +17,7 @@ Route::prefix('pages')->controller(homepage::class)->group(function (): void {
     Route::get('/thesaurusresult/{term?}/{category?}/{rec?}', 'getThesaurusresult');
     Route::post('/thesaurusresult1', 'postThesaurusresult1');
     Route::get('/contacts', 'getContacts');
-    Route::get('/aboutproject', 'getAboutproject');
-    Route::get('/aboutme', 'getAboutme');
+    Route::get('/privacy', 'getPrivacy');
     Route::post('/editauthor', 'postEditauthor');
     Route::get('/editproperty/{id}/{msg?}', 'getEditproperty');
     Route::get('/editcatid/{id}/{msg?}', 'getEditcatid');
