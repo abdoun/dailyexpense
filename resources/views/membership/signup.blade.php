@@ -49,7 +49,7 @@
 	<div class="col-xs-4 col-md-3">
       <img type="text" class="img-thumbnail" src="{{ asset('membership/imgcaptcha') }}" width="80" height="40" id="captcha_img" />
 	  <button type="button" class="btn btn-default" aria-label="Left Align">
-		<span class="glyphicon glyphicon-refresh" aria-hidden="true" onclick="document.getElementById('captcha_img').src = '{{ asset('membership/imgcaptcha') }}/' + Math.random();return false;"></span>
+		<span class="glyphicon glyphicon-refresh" aria-hidden="true" onclick="document.getElementById('captcha_img').src = '{{ asset('membership/imgcaptcha') }}?refresh=' + Math.random();return false;"></span>
 	  </button>
     </div>
   </div>

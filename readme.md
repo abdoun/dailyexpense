@@ -1,23 +1,50 @@
-## Laravel PHP Framework
+# Dailyexpense
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Dailyexpense is a Laravel application. It requires PHP 8.3 or newer and is
+configured for PHP 8.4 with Laravel 13.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Local setup
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+1. Install PHP 8.4 with the PDO MySQL, mbstring, OpenSSL, and fileinfo extensions,
+   plus Composer.
+2. Install PHP dependencies:
 
-## Official Documentation
+   ```sh
+   composer install
+   ```
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+3. Create a local environment file and generate an application key:
 
-## Contributing
+   ```sh
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+4. Create a MySQL database and import **one** of the SQL dumps in `info/`.
+   The dumps use different database names: `daily_expeniture.sql` targets
+   `daily_expeniture`, while `dailyex1_penses.sql` targets `dailyex1_penses`.
+   Set `DB_DATABASE` in `.env` to the database you imported, and set its
+   connection credentials there.
+5. Run the application with the existing `public_html` document root:
 
-### License
+   ```sh
+   php -S 127.0.0.1:8000 -t public_html server.php
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+The included SQL files are legacy data dumps, not Laravel migration files.
+Import one into an empty database; do not run `php artisan migrate` against an
+imported dump. Neither dump includes the `authors`, `category`, and `cat_id`
+tables used by the thesaurus pages, so those pages need their separate legacy
+data/schema.
+
+For production, point the web server document root at `public_html`, set
+`APP_DEBUG=false`, generate a unique `APP_KEY`, and configure database
+credentials and writable `storage/` directories for the deployment.
+
+## Tests
+
+Run the application tests with:
+
+```sh
+composer test
+```

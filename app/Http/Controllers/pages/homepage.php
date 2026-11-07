@@ -26,7 +26,6 @@ class homepage extends Controller {
 	public function __construct()
 	{
 		//$this->middleware('guest');
-		session()->regenerate();
         App::setLocale(Session::get('lang'));
         if(Session::get('lang')=='')
         {
@@ -44,7 +43,7 @@ class homepage extends Controller {
 	public function getIndex()
 	{
 		App::setLocale(Session::get('lang'));
-		return view('page.master',['active' => 'home','lang_default'=>Session::get('lang')]);
+		return view('page.master',['active' => 'home','lang_default'=>Session::get('lang'),'showHomeNotice'=>true]);
 	}
 	public function getLang($lang='en')
 	{
@@ -164,6 +163,7 @@ class homepage extends Controller {
 		srand((double)microtime()*1000000000); 
 		$string = md5(rand(0,999999));
 		Session::put("new_string",strtoupper( substr($string, 17, 4)));  
-		return view('page.imgcaptcha',['new_string'=>Session::get('new_string')]);
+		return response()->view('page.imgcaptcha',['new_string'=>Session::get('new_string')])
+			->header('Content-Type', 'image/png');
 	}
 }

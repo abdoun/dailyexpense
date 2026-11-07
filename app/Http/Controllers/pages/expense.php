@@ -29,7 +29,6 @@ class expense extends Controller {
 	public function __construct()
 	{
 		//$this->middleware('guest');
-		session()->regenerate();
         App::setLocale(Session::get('lang'));
         if(Session::get('lang')=='')
         {

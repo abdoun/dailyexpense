@@ -17,7 +17,6 @@ class membership extends Controller {
 	public function __construct()
 	{
 		//$this->middleware('guest');
-		session()->regenerate();
         App::setLocale(Session::get('lang'));
         if(Session::get('lang')=='')
         {
@@ -119,6 +118,7 @@ class membership extends Controller {
              DB::table('users')->insert(
                     ['email' => $input['email'], 'username' => $input['username'],'password'=>md5($input['password']),'active'=>1]
                 );
+				session()->regenerate();
 				Session::put('username', $input['username']);
 				$msg='thanks';
 				return view('membership.membership',['active' => 'membership','lang_default'=>Session::get('lang'),'msg'=>$msg]);
@@ -156,6 +156,7 @@ class membership extends Controller {
 			}
 			else
 			{
+				session()->regenerate();
 				Session::put('username', $input['username']);
 				$msg='thanks';
 				return view('membership.membership',['active' => 'membership','lang_default'=>Session::get('lang'),'msg'=>$msg]);
@@ -181,6 +182,7 @@ class membership extends Controller {
 		srand((double)microtime()*1000000000); 
 		$string = md5(rand(0,999999));
 		Session::put("new_string",strtoupper( substr($string, 17, 4)));  
-		return view('page.imgcaptcha',['new_string'=>Session::get('new_string')]);
+		return response()->view('page.imgcaptcha',['new_string'=>Session::get('new_string')])
+			->header('Content-Type', 'image/png');
 	}
 }

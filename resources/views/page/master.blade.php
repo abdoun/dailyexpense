@@ -122,6 +122,9 @@
         <div class="row" style="background-image:url('{{ asset('assets/images/bg.jpg') }}');background-repeat: repeat-x;background-position: top;">
 			<div class="col-xs-12">
 				<h2 style="text-align:center"> @yield('content_title', trans('home.HOME') ) </h2>
+				@if(isset($showHomeNotice) && $showHomeNotice)
+					<p>{{ trans('home.home_notice') }}</p>
+				@endif
 				@yield('content',trans('home.home_content'))
 			</div>
 			@section('footer')
