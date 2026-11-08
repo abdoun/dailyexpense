@@ -1,4 +1,7 @@
 /vendor
 /node_modules
 /.env
+/.env.*
+!/.env.example
+!/.env.docker.example
 /.phpunit.cache
