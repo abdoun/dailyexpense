@@ -6,7 +6,7 @@ services:
     container_name: dailyexpense-app
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8081:80"
+      - "${APP_BIND_IP:-127.0.0.1}:8081:80"
     environment:
       APP_NAME: ${APP_NAME}
       APP_ENV: production
