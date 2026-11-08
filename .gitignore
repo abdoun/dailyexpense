@@ -5,3 +5,4 @@
 !/.env.example
 !/.env.docker.example
 /.phpunit.cache
+.env.docker
