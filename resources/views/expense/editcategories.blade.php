@@ -27,7 +27,6 @@
 </div>
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-	  <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="$.post('{{ asset('thesaurusresult') }}', $( '#thesaurus_search' ).serialize(),function(data){$('#yaz_print').html(data);} );">{{ trans('thesaurus.search') }}</button>-->
 	  <button type="button" class="btn btn-default" onclick="$.post('{{ asset('expense/editcategories') }}', $( '#edit_category' ).serialize(),function(data){$('#categories_edit_modal_').html(data);} );">{{ trans('membership.ok') }}</button>
       <!--<button type="submit" class="btn btn-default">{{ trans('expense.ok') }}</button>-->
 	</div>

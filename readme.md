@@ -33,9 +33,7 @@ configured for PHP 8.4 with Laravel 13.
 
 The included SQL files are legacy data dumps, not Laravel migration files.
 Import one into an empty database; do not run `php artisan migrate` against an
-imported dump. Neither dump includes the `authors`, `category`, and `cat_id`
-tables used by the thesaurus pages, so those pages need their separate legacy
-data/schema.
+imported dump.
 
 For production, point the web server document root at `public_html`, set
 `APP_DEBUG=false`, generate a unique `APP_KEY`, and configure database

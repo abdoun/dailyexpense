@@ -125,7 +125,6 @@ class expense extends Controller {
 		//print($sql.' '.$cat);
 		$count = DB::select('select id  from expenditure where user_id='.$user_id.$sql);
 		$results = DB::select('select expenditure.*,expenditure_category.name as name from expenditure inner join expenditure_category on expenditure_category.id=expenditure.category where expenditure.user_id='.$user_id.$cat.$sql.' order by expenditure.date_time desc'.$limit);
-		//return view('page.thesaurusresult',['active' => 'thesaurus','lang_default'=>Session::get('lang'),'input'=>$input,'results'=>$results,'count'=>$count,'cate'=>$cate,'term'=>$term]);
 		return view('expense.transactions',['active' => 'transactions','lang_default'=>Session::get('lang'),'input'=>$input,'results'=>$results,'count'=>$count]);
     }
     public function getEdittransactions($id,$msg='')
@@ -161,7 +160,6 @@ class expense extends Controller {
 		//print($sql.' '.$cat);
 		$count = DB::select('select expenditure_category.id  from expenditure_category where user_id='.$user_id.$sql);
 		$results = DB::select('select expenditure_category.id as id,expenditure_category.name as name,expenditure_category.notes as notes from expenditure_category where user_id='.$user_id.$cat.$sql.' order by expenditure_category.id asc'.$limit);
-		//return view('page.thesaurusresult',['active' => 'thesaurus','lang_default'=>Session::get('lang'),'input'=>$input,'results'=>$results,'count'=>$count,'cate'=>$cate,'term'=>$term]);
 		return view('expense.categories',['active' => 'categories','lang_default'=>Session::get('lang'),'input'=>$input,'results'=>$results,'count'=>$count,'name'=>$name]);
 	}
     public function getEditcategories($id,$msg='')
@@ -170,7 +168,6 @@ class expense extends Controller {
         if(!$this->membership->satisfied())  return $this->membership->getLogin();
         if($id!='new')
         {
-            //$author = DB::select("select * from authors where id='".$id."'");
     		//$author  = json_decode(json_encode($author), true);
     		$category = DB::select("select expenditure_category.* from expenditure_category  where expenditure_category.id='".$id."'");
     		$category  = json_decode(json_encode($category), true);

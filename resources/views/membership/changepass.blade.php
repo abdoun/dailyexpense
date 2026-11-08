@@ -23,7 +23,7 @@
 @endif
 
 
-<form class="form-horizontal" id="thesaurus_search" method="post"  action="{{ asset('membership/changepass') }}">
+<form class="form-horizontal" id="changepass_form" method="post"  action="{{ asset('membership/changepass') }}">
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	<div class="form-group">
 		<label for="password" class="col-xs-3 control-label">{{ trans('membership.password') }}:</label>

@@ -13,15 +13,8 @@ Route::get('/expense', [expense::class, 'getIndex']);
 Route::prefix('pages')->controller(homepage::class)->group(function (): void {
     Route::get('/index', 'getIndex');
     Route::get('/lang/{lang?}', 'getLang');
-    Route::get('/thesaurus/{msg?}', 'getThesaurus');
-    Route::get('/thesaurusresult/{term?}/{category?}/{rec?}', 'getThesaurusresult');
-    Route::post('/thesaurusresult1', 'postThesaurusresult1');
     Route::get('/contacts', 'getContacts');
     Route::get('/privacy', 'getPrivacy');
-    Route::post('/editauthor', 'postEditauthor');
-    Route::get('/editproperty/{id}/{msg?}', 'getEditproperty');
-    Route::get('/editcatid/{id}/{msg?}', 'getEditcatid');
-    Route::get('/deleteauthor/{id}', 'getDeleteauthor');
     Route::get('/imgcaptcha', 'getImgcaptcha');
 });
 

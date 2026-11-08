@@ -32,7 +32,6 @@
 		@section('header_bar')
 			<div class="col-xs-9 col-sm-10">
 				<a class="@if($active=='home') active @else link @endif" role="button" href="{{ asset('pages/index') }}">{{ trans('home.HOME') }}</a> 
-				<a class="@if($active=='thesaurus') active @else link @endif" role="button" href="{{ asset('pages/thesaurus') }}">{{ trans('thesaurus.THESAURUS') }}</a> 
 				<a class="@if($active=='list') active @else link @endif" role="button" href="{{ asset('pages/list') }}">{{ trans('list.LIST') }}</a> 
 				<a class="@if($active=='contacts') active @else link @endif" role="button" href="{{ asset('pages/contacts') }}">{{ trans('contacts.CONTACTS') }}</a> 
 				<a class="@if($active=='membership') active @else link @endif" role="button" href="{{ asset('membership/index') }}">{{ trans('membership.LOGIN') }}</a> 

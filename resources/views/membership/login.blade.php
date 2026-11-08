@@ -21,7 +21,7 @@
 	</div>
 </div>
 @endif
-<form class="form-horizontal" id="thesaurus_search" method="post"  action="{{ asset('membership/signin') }}">
+<form class="form-horizontal" id="login_form" method="post" action="{{ asset('membership/signin') }}">
 <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
   <div class="form-group">
     <label for="username" class="col-xs-3 control-label">{{ trans('membership.username') }}:</label>
