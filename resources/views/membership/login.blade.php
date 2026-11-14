@@ -38,7 +38,7 @@
   <div class="form-group @if($msg=='error_code_kaptcha') has-error @endif">
     <label for="code_capthca" class="col-xs-3 control-label">{{ trans('Title.code') }}:</label>
     <div class="col-xs-12 col-sm-3">
-      <input type="text" class="form-control" id="code_capthca" name="code_capthca" placeholder="{{ trans('title.code') }}" onkeyup="this.value=this.value.toUpperCase();this.value=trim(this.value);">
+      <input type="text" class="form-control" id="code_capthca" name="code_capthca" placeholder="{{ trans('Title.code') }}" onkeyup="this.value=this.value.toUpperCase();this.value=trim(this.value);">
     </div>
 	<div class="col-xs-4 col-md-3">
       <img type="text" class="img-thumbnail" src="{{ asset('membership/imgcaptcha') }}" width="80" height="40" id="captcha_img" />
