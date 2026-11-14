@@ -137,13 +137,24 @@ class expense extends Controller {
         $category = DB::select('select expenditure_category.id as id,expenditure_category.name as name from expenditure_category where user_id='.$user_id.' order by expenditure_category.id asc');
 		//$category  = json_decode(json_encode($category), true);
         if($id!='new')
-        {            
-    		$expenditure = DB::select("select expenditure.* from expenditure where expenditure.id='".$id."'");
-    		$expenditure  = json_decode(json_encode($expenditure), true);
+        {
+            $expenditure = DB::select('select expenditure.* from expenditure where expenditure.id = ?', [$id]);
+            if(empty($expenditure))
+            {
+                abort(404);
+            }
+            $expenditure  = json_decode(json_encode($expenditure), true);
         }
 		else
         {
-            $expenditure=null;
+            $expenditure=[[
+                'id'=>'new',
+                'to_from'=>'to',
+                'qty'=>'',
+                'date_time'=>'',
+                'category'=>null,
+                'notes'=>'',
+            ]];
         }
 		return view('expense.edittransactions',['lang_default'=>Session::get('lang'),'expenditure'=>$expenditure,'category'=>$category,'msg'=>$msg]);
 	}
