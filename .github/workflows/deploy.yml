@@ -1,0 +1,23 @@
+name: Build and Deploy DailyExpense
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dailyexpense-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build and deploy
+        run: sudo -n /usr/local/sbin/deploy-dailyexpense
